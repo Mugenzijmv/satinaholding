@@ -37,13 +37,39 @@
     <!-- Colors for this template -->
     <link href="css/colors.css" rel="stylesheet">
 
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<script>
+$(document).ready(function(){
+    var maxLength = 100;
+    $(".show-read-more").each(function(){
+        var myStr = $(this).text();
+        if($.trim(myStr).length > maxLength){
+            var newStr = myStr.substring(0, maxLength);
+            var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+            $(this).empty().html(newStr);
+            $(this).append(' <a href="javascript:void(0);" class="read-more">...read more</a>');
+            $(this).append('<span class="more-text">' + removedStr + '</span>');
+        }
+    });
+    $(".read-more").click(function(){
+        $(this).siblings(".more-text").contents().unwrap();
+        $(this).remove();
+    });
+});
+</script>
+
+
 <style type="text/css">
 
+    .show-read-more .more-text{
+        display: none;
+    }
 
     button {
         background-color: blue;
@@ -56,35 +82,300 @@
         background-color: #169dd9;
         border-radius: 5px;
     }
-    body {
-        background-color: #f8f7fa;
-    }
 
+.card {
+    padding-top: 20px;
+    margin: 10px 0 20px 0;
+    background-color: rgba(214, 224, 226, 0.2);
+    border-top-width: 0;
+    border-bottom-width: 2px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
 
-</style>
+.card .card-heading {
+    padding: 0 20px;
+    margin: 0;
+}
 
+.card .card-heading.simple {
+    font-size: 20px;
+    font-weight: 300;
+    color: #777;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.card .card-heading.image img {
+    display: inline-block;
+    width: 46px;
+    height: 46px;
+    margin-right: 15px;
+    vertical-align: top;
+    border: 0;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.card .card-heading.image .card-heading-header {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.card .card-heading.image .card-heading-header h3 {
+    margin: 0;
+    font-size: 14px;
+    line-height: 16px;
+    color: #262626;
+}
+
+.card .card-heading.image .card-heading-header span {
+    font-size: 12px;
+    color: #999999;
+}
+
+.card .card-body {
+    padding: 0 20px;
+    margin-top: 20px;
+}
+
+.card .card-media {
+    padding: 0 20px;
+    margin: 0 -14px;
+}
+
+.card .card-media img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.card .card-actions {
+    min-height: 30px;
+    padding: 0 20px 20px 20px;
+    margin: 20px 0 0 0;
+}
+
+.card .card-comments {
+    padding: 20px;
+    margin: 0;
+    background-color: #f8f8f8;
+}
+
+.card .card-comments .comments-collapse-toggle {
+    padding: 0;
+    margin: 0 20px 12px 20px;
+}
+
+.card .card-comments .comments-collapse-toggle a,
+.card .card-comments .comments-collapse-toggle span {
+    padding-right: 5px;
+    overflow: hidden;
+    font-size: 12px;
+    color: #999;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-comments .media-heading {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.card.people {
+    position: relative;
+    display: inline-block;
+    width: 170px;
+    height: 300px;
+    padding-top: 0;
+    margin-left: 20px;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.card.people:first-child {
+    margin-left: 0;
+}
+
+.card.people .card-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 170px;
+    height: 150px;
+    background-color: #ffffff;
+}
+
+.card.people .card-top.green {
+    background-color: #53a93f;
+}
+
+.card.people .card-top.blue {
+    background-color: #427fed;
+}
+
+.card.people .card-info {
+    position: absolute;
+    top: 150px;
+    display: inline-block;
+    width: 100%;
+    height: 101px;
+    overflow: hidden;
+    background: #ffffff;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.card.people .card-info .title {
+    display: block;
+    margin: 8px 14px 0 14px;
+    overflow: hidden;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 18px;
+    color: #404040;
+}
+
+.card.people .card-info .desc {
+    display: block;
+    margin: 8px 14px 0 14px;
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 16px;
+    color: #737373;
+    text-overflow: ellipsis;
+}
+
+.card.people .card-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: inline-block;
+    width: 100%;
+    padding: 10px 20px;
+    line-height: 29px;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.card.hovercard {
+    position: relative;
+    padding-top: 0;
+    overflow: hidden;
+    text-align: center;
+    background-color: rgba(214, 224, 226, 0.2);
+}
+
+.card.hovercard .cardheader {
+    background: url("images/phone1.jpg");
+    background-size: cover;
+    height: 135px;
+}
+
+.card.hovercard .avatar {
+    position: relative;
+    top: -50px;
+    margin-bottom: -50px;
+}
+
+.card.hovercard .avatar img {
+    width: 100px;
+    height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 5px solid rgba(255,255,255,0.5);
+}
+
+.card.hovercard .info {
+    padding: 4px 8px 10px;
+}
+
+.card.hovercard .info .title {
+    margin-bottom: 4px;
+    font-size: 24px;
+    line-height: 1;
+    color: #262626;
+    vertical-align: middle;
+}
+
+.card.hovercard .info .desc {
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 20px;
+    color: #737373;
+    text-overflow: ellipsis;
+}
+
+.card.hovercard .bottom {
+    padding: 0 20px;
+    margin-bottom: 17px;
+}
+.mycard {
+  text-align: center;
+  padding: 3px;
+  padding-bottom: 20px;
+  transition: 0.3s;
+ }
+ .mycard:hover {
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ }
+
+ .myslidecontrol {
+    width: 4%;
+    opacity: 0.2;
+    color: black;
+    transition: 0.3s;
+ }
+  .myslidecontrol:hover {
+    width: 5%;
+ }
+ .myvlog {
+    border-left: 1px solid dodgerblue;
+    padding-bottom: 40px;
+    transition: 0.3s;
+ }
+ .myvlog:hover {
+    border-left: 6px solid dodgerblue;
+    background-color: #c6cfd6;
+ }
+</style> 
 </head>
 <body>
-
-    <!-- LOADER -->
+    <!-- LOADER 
     <div id="preloader">
         <img class="preloader" src="images/loader.gif" alt="">
-    </div><!-- end loader -->
-    <!-- END LOADER -->
+    </div>
+     END LOADER -->
 
-    <div id="wrapper">
+<div class="container-fluid">
         <div class="collapse top-search" id="collapseExample">
             <div class="card card-block">
                 <div class="newsletter-widget text-center">
                     <form class="form-inline">
                         <input type="text" class="form-control" placeholder="What you are looking for?">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-search"></i>
+                        </button>
                     </form>
                 </div><!-- end newsletter -->
             </div>
         </div><!-- end top-search -->
 
-        <div class="topbar-section" style="  ">
+        <div class="topbar-section" style="background-color: #1683b3;background-image: url('images/footer.png');border-top: 4px dashed #fff;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-6 hidden-xs-down">
@@ -92,22 +383,22 @@
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google+"><i class="fa fa-google-plus"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google+"><i class="fa fa-google-plus" style="color: #fff;"></i></a>
                         </div><!-- end social -->
                     </div><!-- end col -->
 
                     <div class="col-lg-6 hidden-md-down">
-                        <div class="topmenu text-center">
+                        <div class="topmenu text-center" >
                             <ul class="list-inline">
-                                <li class="list-inline-item"><a href="blog-category-01.html"><i class="fa fa-envelope-o"></i>  Email: info@satina-holding.com</a></li>
-                                <li class="list-inline-item"><a href="blog-category-02.html"><i class="fa fa-phone"></i> 628 44 95 77/624 20 20 99</a></li>
+                                <li class="list-inline-item"><a  href="blog-category-01.html"><i style="color: #fff;" class="fa fa-envelope-o"></i> <strong style="color: #fff;"> Email: info@satina-holding.com</strong></a></li>
+                                <li class="list-inline-item"><a href="blog-category-02.html"><i style="color: #fff;" class="fa fa-phone"></i> <strong style="color: #fff;">628 44 95 77/624 20 20 99</strong></a></li>
                             </ul><!-- end ul -->
                         </div><!-- end topmenu -->
                     </div><!-- end col -->
 
                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                         <div class="topsearch text-right">
-                            <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-search"></i> Search</a>
+                            <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i style="color: #fff;" class="fa fa-search"></i> <strong style="color: #fff;">Search here</strong></a>
                         </div><!-- end search -->
                     </div><!-- end col -->
                 </div><!-- end row -->
@@ -118,74 +409,121 @@
             <div class="container">
                 <div class="col-lg-12 col-xm-12">
                 <nav class="navbar navbar-inverse navbar-toggleable-md">
-
                     <div class="row">
-                        <div class="col-lg-3 col-md-3 col-xs-8">
+                      
+                        <div class="col-xs-4 col-xs-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    
+                            <button st  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#cloapediamenu" aria-controls="cloapediamenu" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+
+
+                                </div>
+                                <div class="col-md-6">
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-12 col-md-12">
                             
-                        <div class="logo">
+                    <div class="collapse navbar-collapse justify-content-md-center" id="cloapediamenu" style="width: 100%;">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php">Accueil</a>
+                            </li>
+
+
+                            <li class="nav-item dropdown has-submenu">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">À propos de nous</a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdown02">
+                                    <li><a class="dropdown-item" href="mission.html">Mission & Vision</a></li>
+                                    <li><a class="dropdown-item" href="#">Comité executive</a></li>
+                                </ul>
+                            </li>
+
+
+                            <li class="nav-item dropdown has-submenu">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nos produits</a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdown02">
+                                    <li><a class="dropdown-item" href="telephones.php">Telephones</a></li>
+                                    <li><a class="dropdown-item" href="accessoires.php">Accessoires</a></li>
+                                    <li><a class="dropdown-item" href="#">My cash</a></li>
+                                </ul>
+                            </li>
+
+
+                            <li class="nav-item hidden-md-down hidden-sm-down hidden-xs-down">
+
+                            <div class="logo">
                             <a href="index.php" ><img style="width: 50%;" src="images/logo-satina.png" alt="Satina logo"></a>
                         </div><!-- end logo -->
 
-                        </div>
-                        <div class="col-xs-4 col-xs-4" style="float: right;">
-                            
-                    <button style="align-items: right;"  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#cloapediamenu" aria-controls="cloapediamenu" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                        </div>
-                        <div class="col-lg-9 col-md-9">
-                            
-                    <div class="collapse navbar-collapse justify-content-md-center" id="cloapediamenu">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link color-pink-hover" href="index.php">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accueil</a>
-                            </li>
+                    </li>
 
 
-                            <li class="nav-item dropdown has-submenu">
-                                <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">A propos de nous</a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdown02">
-                                    <li><a class="dropdown-item" href="blog-author.html">Presentation</a></li>
-                                    <li><a class="dropdown-item" href="page-contact.html">Mission</a></li>
-                                    <li><a class="dropdown-item" href="page.html">Mot du DG</a></li>
-                                    <li><a class="dropdown-item" href="page-fullwidth.html">Nos valeurs</a></li>
-                                    <li><a class="dropdown-item" href="page-404.html">Politique de confidentialite</a></li>
+                            <li class="nav-item dropdown has-submenu menu-large ">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Boutique</a>
+                                <ul class="dropdown-menu megamenu" aria-labelledby="dropdown01">
+                                    <li>
+                                        <div class="mega-menu-content clearfix">
+                                            <div class="tab-details clearfix" style="background-color: #f2f2f2;">
+                                                <div id="cat05" class="tabcontent active text-center">
+                                                    <div class="row" >
+                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                                                            <div class="blog-box">
+                                                                <div class="post-media">
+                                                                    <a href="single.html" title="">
+                                                                        <img src="images/logos/felux.png" alt="" class="img-fluid">
+                                                                    </a>
+                                                                </div><!-- end media -->
+                                                            </div><!-- end blog-box -->
+                                                        </div>
+
+                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                                                            <div class="blog-box">
+                                                                <div class="post-media">
+                                                                    <a href="single.html" title="">
+                                                                        <img src="images/logos/oraimo.png" alt="" class="img-fluid">
+                                                                    </a>
+                                                                </div><!-- end media -->
+                                                            </div><!-- end blog-box -->
+                                                        </div>
+
+                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                                                            <div class="blog-box">
+                                                                <div class="post-media">
+                                                                    <a href="single.html" title="">
+                                                                        <img src="images/logos/lava.png" alt="" class="img-fluid">
+                                                                    </a>
+                                                                </div><!-- end media -->
+                                                            </div><!-- end blog-box -->
+                                                        </div>
+
+                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                                                            <div class="blog-box">
+                                                                <div class="post-media">
+                                                                    <a href="#" title="">
+                                                                        <img src="images/logos/samsung.png" alt="" class="img-fluid">
+                                                                    </a>
+                                                                </div><!-- end media -->
+                                                            </div><!-- end blog-box -->
+                                                        </div>
+
+                                                    </div><!-- end row -->
+                                                </div>
+                                            </div><!-- end tab-details -->
+                                        </div><!-- end mega-menu-content -->
+                                    </li>
                                 </ul>
                             </li>
 
 
                             <li class="nav-item dropdown has-submenu">
-                                <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nos services</a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdown02">
-                                    <li><a class="dropdown-item" href="blog-author.html">Vente en ligne</a></li>
-                                    <li><a class="dropdown-item" href="page-contact.html">Telephones</a></li>
-                                    <li><a class="dropdown-item" href="page.html">Accessoires</a></li>
-                                    <li><a class="dropdown-item" href="page-fullwidth.html">Objects connectes</a></li>
-                                    <li><a class="dropdown-item" href="page-404.html">Conseils</a></li>
-                                    <li><a class="dropdown-item" href="page-sitemap.html">Garanties</a></li>
-                                    <li><a class="dropdown-item" href="page.html">Assistance technique</a></li>
-                                    <li><a class="dropdown-item" href="page.html">Service apre vente</a></li>
-                                    <li><a class="dropdown-item" href="page.html">My cash</a></li>
-                                </ul>
-                            </li>
-
-                                                        <li class="nav-item dropdown has-submenu">
-                                <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nos equipes</a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdown02">
-                                    <li><a class="dropdown-item" href="blog-author.html">Organigramme</a></li>
-                                    <li><a class="dropdown-item" href="page-contact.html">Caliree</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown has-submenu">
-                                <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nartenariot</a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdown02">
-                                    <li><a class="dropdown-item" href="blog-author.html">Non partenaires</a></li>
-                                    <li><a class="dropdown-item" href="page-contact.html">Recentseaux de dustribution</a></li>
-                                </ul>
+                                <a class="nav-link" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
                             </li>
                             <li class="nav-item dropdown has-submenu">
                                 <a class="nav-link" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contact</a>
@@ -202,189 +540,547 @@
             </div><!-- end container -->
         </header><!-- end header -->
 
-        <div class="row">
-            <div class="col-lg-1"></div>
-            <div class="col-lg-10">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="images/1.jpg" alt="First slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5 style="">SAMSUNG Galaxy A20S</h5>
-                                <p style="color: white;">Enjoy a bigger and sharper screen. Experience an immersive experience with widescreen Infinity-V 6.4 "Galaxy A30s. Its wide aspect ratio displays the content of a side to side of the screen. Watch your videos, games and streams in Direct favorite in HD Super AMOLED +.</p>
-                                <a href="" class="btn btn-success linkbutton">Read more</a>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="images/2.jpg" alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="images/3.jpg" alt="Third slide">
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
+
+
+
+
+
+
+<div id="wrapper">
+
+        
+<div class="row myslide">
+    <div class="col-lg-12">  
+
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active" ></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" style="width: 100%; height: 400px;">
+          <div class="carousel-item active">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <img class="d-block w-100" src="images/slide0.jpg" alt="First slide" style="width: 100%;  ">      
+                  </div>      
+              </div>
+          </div>
+          <div class="carousel-item ">
+              <div class="row ">
+                  <div class="col-lg-6" style="padding: 40px; padding-top: 60px;">
+                      <h1 style="padding-left: 40px;">SAMSUNG Galaxy A30S</h1>
+                      <p style="font-size: 20px; padding-left: 40px;" class="show-read-more">La première nouveauté du Galaxy A51, c’est la présence d’un quadruple capteur photo à l’arrière contre trois capteurs pour le Galaxy A50 actuel. Les définitions sont aussi à la hausse. Le module principal…      
+                      </p>      
+                      <a href="#" class="btn btn-primary linkbutton" style=" margin-left: 40px;">Buy Now</a>      
+                  </div>      
+                  <div class="col-lg-6">
+                      <img class="d-block w-100" src="images/slide1.jpg" alt="First slide">
+                            
+                  </div>      
+              </div>
+          </div>
+          <div class="carousel-item">
+              <div class="row">
+                  <div class="col-lg-6">
+                      <img class="d-block w-100" src="images/p1.jpg" alt="Third slide">
+                  </div>
+                  <div class="col-lg-6" style="padding: 40px; padding-top: 60px;">
+                      <h1 style="padding-left: 40px;">SAMSUNG Galaxy A30S</h1>
+                      <p style="font-size: 20px; padding-left: 40px;" class="show-read-more">La première nouveauté du Galaxy A51, c’est la présence d’un quadruple capteur photo à l’arrière contre trois capteurs pour le Galaxy A50 actuel. Les définitions sont aussi à la hausse. Le module principal…      
+                      </p>      
+                      <a href="#" class="btn btn-primary linkbutton" style=" margin-left: 40px;">Buy Now</a>      
+                  </div>      
+              </div>
+          </div>
+
+          <div class="carousel-item">
+              <div class="row">
+                  <div class="col-lg-6">
+                      <img class="d-block w-100" src="images/p3.jpg" alt="Fourth slide">
+                  </div>
+                  <div class="col-lg-6" style="padding: 40px; padding-top: 60px;">
+                      <h1 style="padding-left: 40px;">SAMSUNG Galaxy A30S</h1>
+                      <p style="font-size: 20px; padding-left: 40px;" class="show-read-more">La première nouveauté du Galaxy A51, c’est la présence d’un quadruple capteur photo à l’arrière contre trois capteurs pour le Galaxy A50 actuel. Les définitions sont aussi à la hausse. Le module principal…      
+                      </p>      
+                      <a href="#" class="btn btn-primary linkbutton" style=" margin-left: 40px;">Buy Now </a>      
+                  </div>      
+              </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev myslidecontrol" href="#carouselExampleIndicators" role="button" data-slide="prev" >
+          <img src="images/left.png" style="width: 100%;">
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next myslidecontrol" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <img src="images/left.png" style="width: 100%;">
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+</div>
+
+
+<hr>
+<br><br>
+
+
+
+
+
+<!--
+
+<div align="center" style="padding-top: 10px;">
+    <h1>Explore the Satina</h1>
+</div>
+
+<div class="row">
+
+
+  <div class="col-lg-4 col-md-12 mb-4">
+
+    
+    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+      <div class="modal-dialog modal-lg" role="document" >
+
+        
+        <div class="modal-content" >
+
+       
+          <div class="modal-body mb-0 p-0" >
+
+            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half" >
+              <iframe style="border-radius: 50%;" class="embed-responsive-item" src="https://www.youtube.com/embed/A3PDXmYoF5U"
+                allowfullscreen></iframe>
+            </div>
+
+          </div>
+
+       
+          <div class="modal-footer justify-content-center">
+            <span class="mr-4">Spread the word!</span>
+            <a type="button" class="btn-floating btn-sm btn-fb"><i class="fab fa-facebook-f"></i></a>
+     
+            <a type="button" class="btn-floating btn-sm btn-tw"><i class="fab fa-twitter"></i></a>
+       
+            <a type="button" class="btn-floating btn-sm btn-gplus"><i class="fab fa-google-plus-g"></i></a>
+     
+            <a type="button" class="btn-floating btn-sm btn-ins"><i class="fab fa-linkedin-in"></i></a>
+
+            <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>
+
+          </div>
+
+        </div>
+       
+
+      </div>
+    </div>
+  
+
+    <a><img class="img-fluid z-depth-1" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg" alt="video"
+        data-toggle="modal" data-target="#modal1"></a>
+
+  </div>
+
+
+
+  <div class="col-lg-4 col-md-6 mb-4">
+
+   
+    <div class="modal fade" id="modal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+
+      
+        <div class="modal-content">
+
+     
+          <div class="modal-body mb-0 p-0">
+
+            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/wTcNtgA6gHs"
+                allowfullscreen></iframe>
+            </div>
+
+          </div>
+
+    
+          <div class="modal-footer justify-content-center">
+            <span class="mr-4">Spread the word!</span>
+            <a type="button" class="btn-floating btn-sm btn-fb"><i class="fab fa-facebook-f"></i></a>
+   
+            <a type="button" class="btn-floating btn-sm btn-tw"><i class="fab fa-twitter"></i></a>
+   
+            <a type="button" class="btn-floating btn-sm btn-gplus"><i class="fab fa-google-plus-g"></i></a>
+        
+            <a type="button" class="btn-floating btn-sm btn-ins"><i class="fab fa-linkedin-in"></i></a>
+
+            <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>
+
+          </div>
+
+        </div>
+     
+
+      </div>
+    </div>
+  
+
+    <a><img class="img-fluid z-depth-1" src="https://mdbootstrap.com/img/screens/yt/screen-video-2.jpg" alt="video"
+        data-toggle="modal" data-target="#modal6"></a>
+
+  </div>
  
+
+
+  <div class="col-lg-4 col-md-6 mb-4">
+
+  
+    <div class="modal fade" id="modal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+
+        <div class="modal-content">
+
+        
+          <div class="modal-body mb-0 p-0">
+
+            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/vlDzYIIOYmM"
+                allowfullscreen></iframe>
             </div>
-            <div class="col-lg-1"></div>
+
+          </div>
+
+          <div class="modal-footer justify-content-center">
+            <span class="mr-4">Spread the word!</span>
+            <a type="button" class="btn-floating btn-sm btn-fb"><i class="fab fa-facebook-f"></i></a>
+           
+            <a type="button" class="btn-floating btn-sm btn-tw"><i class="fab fa-twitter"></i></a>
+      
+            <a type="button" class="btn-floating btn-sm btn-gplus"><i class="fab fa-google-plus-g"></i></a>
+           
+            <a type="button" class="btn-floating btn-sm btn-ins"><i class="fab fa-linkedin-in"></i></a>
+
+            <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>
+
+          </div>
+
+        </div>
+      
+
+      </div>
+    </div>
+ 
+    <a><img class="img-fluid z-depth-1" src="https://mdbootstrap.com/img/screens/yt/screen-video-3.jpg" alt="video"
+        data-toggle="modal" data-target="#modal4"></a>
+
+  </div>
+
+</div>
+
+
+-->
+
+
+
+<div class="container">
+    <div align="center" style="padding-top: 10px;">
+        <h1>Nos Produits & Services</h1>
+        <p>SATINA distributeur officiel des produits Samsung, Lava, Oraimo, Felux en guinée </p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mycard">
+                <img class="card-img-top" src="images/phone.jpg" alt="Card image" style="width:100%; margin-top: 0px;">
+                <div class="card-body">
+                    <h4 class="card-title">Téléphone</h4>
+                    <p class="card-text show-read-more">Depuis plusieurs années dans la distribution de téléphone, accessoires et objet connectés, SATINA est devenu un leader incontestable dans le marché de la téléphonie. Faite nous part de vos besoins en téléphone, accessoires et objet connectés en gros et en détails et SATINA se fera le grand plaisir de vous satisfaire car nous sommes là pour vous. Faite nous part de vos besoins en téléphone, accessoires et objet connectés en gros et en détails et SATINA se fera le grand plaisir de vous satisfaire car nous sommes là pour vous.</p>
+                    <a href="#" class="btn btn-primary stretched-link linkbutton">Buy Now</a>
+                </div>
+            </div>
         </div>
 
-        <br><br>
-
-        <div class="comainter" style="width: 85%; margin: auto;" align="text-center">
-            <div align="center" style="padding-top: 10px;">
-                <h1>Nos Produits & Services</h1>
-                <p>SATINA distributeur officiel des produits Samsung, Lava, Oraimo, Felux en guinée</p>
+        <div class="col-md-4">
+            <div class="card mycard" >
+                <img class="card-img-top" src="images/accessojries.jpg" alt="Card image" style="width:100%; margin-top: 0px;">
+                <div class="card-body">
+                    <h4 class="card-title">Accessoires</h4>
+                    <p class="card-text show-read-more">Le monde de la téléphonie cohabite avec celui des accessoires, raison pour la quelle nous avons décidé de mètre à votre dispositions des accessoires de dernière génération .</p>
+                    <a href="#" class="btn btn-primary stretched-link linkbutton">Buy Now</a>
+                </div>
             </div>
-            <div class="card-columns" style="padding: 10px;">
-                <div class="card" style="padding: 5px">
-                    <img class="card-img-top" src="images/phone.jpg" alt="Card image" style="width: 100%;">
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Téléphone</h4>
-                        <p class="card-text">Depuis plusieurs années dans la distribution de téléphone, accessoires et objet connectés, SATINA est devenu un leader incontestable dans le marché de la téléphonie.</p>
-                        <a href="#" class="btn btn-primary linkbutton">See More</a>
-                    </div>
-                </div>
-                <div class="card" style="padding: 5px">
-                    <img class="card-img-top" src="images/accessojries.jpg" alt="Card image" style="width: 100%;">
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Accessoires</h4>
-                        <p class="card-text">Le monde de la téléphonie cohabite avec celui des accessoires, raison pour la quelle nous avons décidé de mètre à votre dispositions des accessoires de dernière génération .</p>
-                        <a href="#" class="btn btn-success linkbutton">See more</a>
-                    </div>
-                </div>
-                <div class="card" style="padding: 5px">
-                    <img class="card-img-top" src="images/connecte.jpg" alt="Card image" style="width: 100%;">
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Objets Connectés</h4>
-                        <p class="card-text">Faite nous part de vos besoins en téléphone, accessoires et objet connectés en gros et en détails et SATINA se fera le grand plaisir de vous satisfaire car nous sommes là pour vous.</p>
-                        <a href="#" class="btn btn-primary linkbutton">See Profile</a>
-                    </div>
-                </div>
-                <div class="card" style="padding: 5px">
-                    <img class="card-img-top" src="images/.jpg" alt="Card image" style="width: 100%;">
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Service après-vente</h4>
-                        <p class="card-text">Dans un esprit de bonne collaboration Satina et Samsung ont décide de mettre en Guinée un service après-vente Samsung (authentique) pour mieux satisfaire sa clientèle.</p>
-                        <a href="#" class="btn btn-primary linkbutton">See Profile</a>
-                    </div>
-                </div>
-                <div class="card " style="padding: 5px">
-                    <img class="card-img-top" src="images/1.jpg" alt="Card image" style="width: 100%;">
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Conseils</h4>
-                        <p class="card-text">Vous voulez des conseil pour commencer un business dans le domaine de la vente des objets connectés ? Nous somme la solution pour vous.</p>
-                        <a href="#" class="btn btn-primary linkbutton">See more</a>
-                    </div>
-                </div>
-                <div class="card" style="padding: 5px">
-                    <img class="card-img-top" src="images/Assistance.jpg" alt="Card image" style="width: 100%;">
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Assistance</h4>
-                        <p class="card-text">SATINA met tout son expertise et celle de son personnel à votre
-entière disposition pour vous conseiller, assister sur tout vos projet.</p>
-                        <a href="#" class="btn btn-primary linkbutton">See more</a>
-                    </div>
-                </div>
-                <div class="card" style="padding: 5px">
-                    <img class="card-img-top" src="images/1.jpg" alt="Card image" style="width: 100%;">
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Mycash</h4>
-                        <p class="card-text">Toujours dans l'optique de satisfaire les clients et collaborateurs, nous avons mis en place un système de transfère d'argent indépendant</p>
-                        <a href="#" class="btn btn-primary linkbutton">See more</a>
-                    </div>
-                </div>
-                <div class="card" style="padding: 5px">
-                    <img class="card-img-top" src="images/1.jpg" alt="Card image" style="width: 100%;">
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Vente en ligne</h4>
-                        <p class="card-text">Notre objectif étant d'être de plus en plus proche de nos clients. Nous avons mis en place un système de vente en ligne qui vous permet de ....</p>
-                        <a href="#" class="btn btn-primary linkbutton">See more</a>
-                    </div>
-                </div>
-            </div><hr>
         </div>
 
-        <div class="container-fluid padding" style="width: 83%">
-            <div class="row celcome text-center">
-                <div class="col-12">
-                    <h3 class="display-4">Nos partenaires</h3>
+        <div class="col-md-4">
+            <div class="card mycard">
+                <img class="card-img-top" src="images/connecte.jpg" alt="Card image" style="width:100%; margin-top: 0px;">
+                <div class="card-body">
+                    <h4 class="card-title">Mycash</h4>
+                    <p class="card-text show-read-more">Toujours dans l'optique de satisfaire les clients et collaborateurs, nous avons mis en place un système de transfère d'argent indépendant</p>
+                    <a href="#" class="btn btn-primary stretched-link linkbutton">Buy Now</a>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>  
+
+<hr>
+
+
+
+
+<div class="container">
+
+    <div align="center" style="padding-top: 10px; padding-bottom: 10px;">
+        <h1>Blog</h1>
+        <p>SATINA distributeur officiel des produits Samsung, Lava, Oraimo, Felux en guinée </p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 myvlog">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href=""><img src="images/800.jpg" class="img-thumbnail" style="width: 100%;"></a>
+                </div>
+                <div class="col-md-8">
+                <a href="">
+                    <h3>Tirage « Bon de carburant »</h3>
+                    <p>Ce samedi 15 Novembre 2019 a eu lieu au siège social de Satina</p>
+                    <small><a href="single.html" title="" class="btn btn-success">Lire la suite</a></small>
+                    <small style="float: right;">Nov 20,2019</small>
+                </a>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 myvlog">
+            <div class="row">
+                <div class="col-md-8">
+                <a href="">
+                    <h3>Appel à candidatur</h3>
+                    <p>La société Satina recrute (6) Agents commerciaux</p>
+                    <small><a href="single.html" title="" class="btn btn-success">Lire la suite</a></small>
+                    <small style="float: right;">Nov 5,2019</small>
+                </a>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 myvlog">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href=""><img src="images/800.jpg" class="img-thumbnail" style="width: 100%;"></a>
+                </div>
+
+                <div class="col-md-8">
+                <a href="">
+                    <h3>Appel à candidature</h3>
+                    <p>SATINA SARL recrute cinq (5) managers de zone pour conakry, boke, mamou, labe et n’zerekoré</p>
+                    <small><a href="single.html" title="" class="btn btn-success">Lire la suite</a></small>
+                    <small style="float: right;">Nov 4,2019</small>
+                </a>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 myvlog">
+            <div class="row">
+                <div class="col-md-8">
+                <a href="">
+                    <h3>Appel à candidature</h3>
+                    <p>La société Satina Sarl recrute un responsable service après vente pour le Service après vente</p>
+                    <small><a href="single.html" title="" class="btn btn-success">Lire la suite</a></small>
+                    <small style="float: right;">Sep 21,2019</small>
+                </a>
+            </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<br><br>
+
+
+
+
+
+
+
+
+<hr>
+
+
+<div class="container-fluid">
+
+    <div class="container-fluid padding" style="width: 83%">
+        <div class="row celcome text-center">
+            <div class="col-12">
+                <h4 class="display-4"><b> Nos partenaires</b> </h4>
+            </div>
+            <hr>
+            <div class="col-12">
+                <p class="lead">SATINA distributeur officiel des produits Samsung, Lava, Oraimo, Felux en guinée</p>
                 <hr>
-                <div class="col-12">
-                    <p class="lead">SATINA distributeur officiel des produits Samsung, Lava, Oraimo, Felux en guinée</p>
-                </div>
             </div>
         </div>
+    </div>
 
-        <div class="container-fluid padding" style="width: 70%; padding: 10px;">
-            <div class="row text-center padding">
-                <div class="col-xs-12 col-sm-4 col-md-4">
-                    <img src="images/lava.png" style="width: 100%; padding: 10px;">
+    <div class="row">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2">
+                            <img class="d-block w-100" src="images/logos/samsung.png" alt="First slide"></div>
+                        <div class="col-md-2">
+                            <img class="d-block w-100" src="images/logos/felux.png" alt="First slide"></div>
+                        <div class="col-md-2">
+                            <img class="d-block w-100" src="images/logos/lava.png" alt="First slide"></div>
+                        <div class="col-md-2">
+                            <img class="d-block w-100" src="images/logos/mycash.png" alt="First slide"></div>
+                        <div class="col-md-2"></div>
+                    </div>
                 </div>
-                <div class="col-xs-12 col-sm-4 col-md-4">
-                    <img src="images/oraimo.png" style="width: 100%; padding: 10px;">
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2">
+                            <img class="d-block w-100" src="images/logos/oraimo.png" alt="First slide"></div>
+                        <div class="col-md-2">
+                            <img class="d-block w-100" src="images/logos/mtn.png" alt="First slide"></div>
+                        <div class="col-md-2">
+                            <img class="d-block w-100" src="images/logos/orange.png" alt="First slide"></div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2"></div>
+                    </div>
                 </div>
-                <div class="col-xs-12 col-sm-4 col-md-4">
-                    <img src="images/samsung.png" style="width: 100%; padding: 10px;">
-                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev" style="transition: 0.3s;">
+                    <img src="images/left.png" style="width: 20%;">
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next" style="transition: 0.3s;">
+                    <img src="images/right.png" style="width: 20%;">
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
         </div>
+    </div>
+</div>
 
-        <footer style="background-color: #dedde1">
+<br><br>
+
+
+
+        <footer style="background-color: #30434b; color: white;">
             <div class="container-fluid padding" style="width: 83%; margin: auto; ">
                 <div class="row">
-                <div class="col-md-4 col-xs-4">
-                    <img src="images/logo-satina1.png" style="width: 65%;">
-                    <hr class="light">
-                    <p>jhiuery</p>
-                    <p>jhiuery</p>
-                    <p>jhiuery</p>
-                    <p>jhiuery</p>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6 text-center">
+                        <img src="images/logo-satina1.png" style="">
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+                <hr>
+                <div class="row">
+                <div class="col-md-4 col-xs-4" style="">
+
+
+<form class="form-horizontal" action="/action_page.php">
+  <div class="form-group">
+    <div class="col-sm-10">
+        <h3 style="color: white;">Contact rapide</h3>
+      <input type="email" class="form-control" id="email" placeholder="Nom">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="pwd" placeholder="E-mail">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+<textarea class="form-control" id="comment" placeholder="Message"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default" style="color: white;">Envoyer le message</button>
+    </div>
+  </div>
+</form>
                 </div>
                 <div class="col-md-4 col-xs-4">
-                    <hr class="light">
-                    <h5>mdesign</h5>
-                    <hr class="light">
-                    <p>gsghgwjhheh</p>
-                    <p>jhiuery</p>
-                    <p>jhiuery</p>
-                    <p>jhiuery</p>
+                    <h3 style="color: white;">Facebook</h3>
+                    <img src="images/footerimage.jpg" style="width: 100%">
                 </div>
                 <div class="col-md-4 col-xs-4">
-                    <hr class="light">
-                    <h5>mdesign</h5>
-                    <hr class="light">
-                    <p>gsghgwjhheh</p>
-                    <p>jhiuery</p>
-                    <p>jhiuery</p>
-                    <p>jhiuery</p>
+                    <h3 style="color: white;">SATINA</h3>
+                    <img src="images/footerimage.jpg" style="width: 100%">
                 </div>
                 </div>
             </div>
         </footer>
 
-        <div class="dmtop">Scroll to Top</div>
+
+<div class="row" style="padding: 30px;">
+  <div class="col-md-6">
+    <p>©2019 Tous droit réservé - SATINA. - Développé par Jau solution</p>
+  </div>
+  <div class="col-md-6">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 hidden-xs-down">
+                <div class="topsocial">
+                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook">
+                      <i class="fa fa-facebook"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Linkedin">
+                      <i class="fa fa-linkedin"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter">
+                      <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google+">
+                      <i class="fa fa-google-plus" style=""></i>
+                    </a>
+                </div><!-- end social -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end header-logo -->
+  </div>
+</div>
+  
 
 
-        
-    </div><!-- end wrapper -->
+<div class="dmtop">Scroll to Top</div>
+    
+</div><!-- end wrapper -->
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
 
     <!-- Core JavaScript
     ================================================== -->
     <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.collapser.min.js"></script>
     <script src="js/tether.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>

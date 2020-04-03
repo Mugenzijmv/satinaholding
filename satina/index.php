@@ -25,7 +25,7 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
 
-    <!-- FontAwesome Icons core CSS -->
+    <!-- FontAwesom Icons core CSS -->
     <link href="css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
